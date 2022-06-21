@@ -5,7 +5,7 @@ class Profile(models.Model):
     class Meta:
         verbose_name_plural = "Staff"
 
-    first_name = models.CharField(max_length=254)
+    first_name = models.CharField(max_length=254, unique=True)
     last_name = models.CharField(max_length=254)
     email_address = models.EmailField()
     phone_number = models.IntegerField()
