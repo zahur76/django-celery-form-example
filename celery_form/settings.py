@@ -61,6 +61,9 @@ ROOT_URLCONF = 'celery_form.urls'
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
+# celery config
+CELERY_BROKER_URL = 'redis://localhost:6379'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
