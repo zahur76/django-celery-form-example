@@ -3,7 +3,7 @@ from django import forms
 from .models import Profile
 
 
-class add_staffForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = "__all__"
@@ -36,6 +36,6 @@ class add_staffForm(forms.ModelForm):
             else:
                 self.fields[field].widget.attrs[
                     "class"
-                ] = "border-dark m-1 rounded-0 mx-auto add_staff-form-input"
+                ] = "border m-1 rounded-1 mx-auto add_staff-form-input w-100 p-1"
 
             # self.fields[field].label = False
