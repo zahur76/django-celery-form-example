@@ -10,4 +10,4 @@ def debug_task(self, form):
     print(form)
     profile = ProfileForm(form)
     profile.save()
-    HttpResponse(status=200) 
+    return HttpResponse(status=200) 
