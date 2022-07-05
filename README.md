@@ -2,11 +2,15 @@
 
 Example of using celery when submitting forms in django.
 
-## Run Celery
+## Run Celery and Redis
 
 Must start up celery using command:
 
 ```celery -A django_celery.celery worker --loglevel=info --pool=solo ``` 
+
+In settings.py include and start redis server (docker or redis)
+
+``` CELERY_BROKER_URL = 'redis://localhost:6379' ```
 
 ## Steps
 
