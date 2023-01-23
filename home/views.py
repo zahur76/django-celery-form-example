@@ -12,6 +12,7 @@ def index(request):
         form = ProfileForm(request.POST)
         data = form.data
         if form.is_valid():
+            print('doda')
             debug_task.delay(data)
             print('form submitted')
             return redirect(reverse("home"))

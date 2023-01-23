@@ -7,6 +7,7 @@ from .forms import ProfileForm
 
 @app.task(bind=True)
 def debug_task(self, form):
+    print('celery form')
     print(form)
     profile = ProfileForm(form)
     profile.save()
