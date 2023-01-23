@@ -64,6 +64,18 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 # celery config
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
+
+CELERY_BEAT_SCHEDULE = {
+      'add-every-30-seconds': {
+        'task': 'home.tasks.say_hello',
+        'schedule': 5.0,
+        'args': (),
+        'options': {
+            'expires': 15.0,
+        },
+    },
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

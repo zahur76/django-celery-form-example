@@ -1,6 +1,7 @@
 import imp
 from celery_form.celery import app
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
+from celery import shared_task
 
 from .forms import ProfileForm
 
@@ -11,4 +12,10 @@ def debug_task(self, form):
     print(form)
     profile = ProfileForm(form)
     profile.save()
+    return HttpResponse(status=200) 
+
+
+@shared_task
+def say_hello():
+    print("hello")
     return HttpResponse(status=200) 

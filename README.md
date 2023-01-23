@@ -1,12 +1,20 @@
 # CELERY FORM
 
-Example of using celery when submitting forms in django.
+Example of using celery for backend task (submitting forms) and scheduled task.
 
 ## Run Celery and Redis
 
 Must start up celery using command:
 
 ```celery -A celery_form.celery worker --loglevel=info --pool=solo ``` 
+
+```celery -A APP.celery worker --loglevel=info --pool=solo ``` 
+
+for scheduled task must also run:
+
+```celery -A celery_form.celery beat```
+
+```celery -A APP.celery beat```
 
 In settings.py include and start redis server (docker or redis)
 
@@ -38,13 +46,29 @@ launch docker compose file with  ```docker compose up```
     # Load task modules from all registered Django app configs.
     app.autodiscover_tasks()```
 
-2. create task.py with celery task in app
+2. create task.py with celery task in app. In this exmaple we have one for form submission and another for scheduled task
 
 3. Within view send form data to task
 
     ``` debug_task.delay(data) ```
 
     Task will be sent to celery for execution
+
+
+4. For scheduled task add folowing in settings:
+
+```
+CELERY_BEAT_SCHEDULE = {
+      'add-every-30-seconds': {
+        'task': 'home.tasks.say_hello',
+        'schedule': 5.0,
+        'args': (),
+        'options': {
+            'expires': 15.0,
+        },
+    },
+}
+```
 
 4. In Production add following code to procfile to start celery workers:
 
