@@ -5,7 +5,7 @@ services:
       - ./tmp/db:/var/lib/postgresql/data/
     environment:
       - POSTGRES_PASSWORD=password
-  re
+  redis:
     image: "redis:alpine"
   web:
     build: .
