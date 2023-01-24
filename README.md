@@ -2,7 +2,7 @@
 
 Example of using celery for backend task (submitting forms) and scheduled task.
 
-## Run Celery and Redis
+## Run Celery and Redis no docker
 
 Must start up celery using command:
 
@@ -73,3 +73,11 @@ CELERY_BEAT_SCHEDULE = {
 4. In Production add following code to procfile to start celery workers:
 
     ``` worker: celery -A YOUR-PROJECT_NAME worker -l info -B ```
+
+5. Make Docker Image for web application
+
+6. Make docker compose file for all services
+
+7. To run commands use:
+
+``` docker exec -it container_id python manage.py createsuperuser ```

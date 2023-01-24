@@ -1,11 +1,38 @@
-volumes:
-  data:
-
 services:
-  redis:
-    image: redis:latest
+  db:
+    image: postgres:13.0-alpine
     volumes:
-      - data:/data
+      - ./tmp/db:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_PASSWORD=password
+  re
+    image: "redis:alpine"
+  web:
+    build: .
+    command: bash -c "python /app/manage.py migrate --noinput && python /app/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
     ports:
-      - 6379:6379
-  
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+  celery:
+    build: .
+    command: celery -A celery_form.celery worker --loglevel=info --pool=solo
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+  celery-beat:
+    build: .
+    command: celery -A celery_form.celery beat  
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data:
