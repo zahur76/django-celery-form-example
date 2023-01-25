@@ -10,3 +10,5 @@ node_modules/
 .venv
 db.sqlite3
 celerybeat-*
+db_password*
+postgres_data
