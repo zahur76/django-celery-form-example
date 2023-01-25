@@ -3,7 +3,7 @@ services:
     image: postgres:13.0-alpine
     container_name: postgres
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data2/
+      - ./postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_PASSWORD=password
   redis:
@@ -35,5 +35,5 @@ services:
       - db
       - redis
 
-volumes:
-  postgres_data:
+# volumes:
+#   postgres_data:

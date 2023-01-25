@@ -12,3 +12,4 @@ db.sqlite3
 celerybeat-*
 db_password*
 postgres_data
+celery
