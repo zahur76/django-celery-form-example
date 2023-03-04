@@ -13,3 +13,4 @@ celerybeat-*
 db_password*
 postgres_data
 celery
+.env

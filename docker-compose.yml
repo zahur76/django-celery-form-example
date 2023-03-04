@@ -1,11 +1,13 @@
 services:
   db:
     image: postgres:13.0-alpine
-    container_name: postgres
+    container_name: postgres_form
     volumes:
       - ./postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${PASSWORD}
   redis:
     image: "redis:alpine"
   web:
@@ -18,6 +20,12 @@ services:
     depends_on:
       - db
       - redis
+    environment:
+      # The environment variable credentials that is needed 
+      # in django settings for Postgres to work.
+      - db_pwd=${PASSWORD}
+      - SECRET_KEY=${SECRET_KEY}
+      - DEVELOPMENT=${DEVELOPMENT}
   celery:
     build: .
     command: celery -A celery_form.celery worker --loglevel=info --pool=solo

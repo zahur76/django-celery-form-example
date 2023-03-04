@@ -81,3 +81,11 @@ CELERY_BEAT_SCHEDULE = {
 7. To run commands use:
 
 ``` docker exec -it container_id python manage.py createsuperuser ```
+
+db.createUser(
+  {
+    user: "Admin",
+    pwd: passwordPrompt(),
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+ }
+)
